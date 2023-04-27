@@ -1,0 +1,2111 @@
+-------------------------------------------------------------- Borrower_form.js ----------------------------------------------------------------------------- 
+
+import { LightningElement,track,api,wire } from 'lwc';
+    import { getPicklistValues } from 'lightning/uiObjectInfoApi';
+    import { getpicklistvalues } from 'lightning/uiObjectInfoApi';
+    import { getObjectInfo } from 'lightning/uiObjectInfoApi';
+    import Email_Address__c from '@salesforce/schema/Email_Address__c';
+    import email_id from '@salesforce/schema/Email_Address__c.Name';
+    import City_name from '@salesforce/schema/Email_Address__c.City__c   ';
+    import Primary_name from '@salesforce/schema/Email_Address__c.Primary_Borrower';
+    import Residence_address from '@salesforce/schema/Email_Address__c.Residence_Address';
+    import State_name from '@salesforce/schema/Email_Address__c.State__c';
+    import Zipcode from '@salesforce/schema/Email_Address__c.Zip_Code__c	';
+    //import financial_assets from '@salesforce/schema/FINANCIAL_AASTS__c';
+
+
+export default class Testing extends LightningElement {
+
+                
+        // created all veriables for show or hold record data on text box fields start from here ////
+
+            @track show1 = ''; show2 = ''; show3 = ''; show4 = ''; show5 = ''; show6 = ''; show7 = ''; show8 = ''; show9 = '';  show10 = ''; show11 = ''; show12 = ''; show13 = '';  show14 = ''; show15 = '';  show16 = ''; show17 = '';
+            show18 = ''; show19 = ''; show20 = ''; show21= ''; show22 = ''; show23 = ''; show24 = ''; show25 = ''; show26 = ''; show27 = ''; show28 = ''; show29 = ''; show30 = ''; show31 = ''; show31= ''; show32 = ''; show33 = '';
+             show34 = ''; show35 = ''; show36 = '';show37 = ''; show38 = ''; show39 = ''; show40 = '';  show41= ''; show42 = ''; show43 = ''; show44 = ''; show45 = ''; show46 = ''; show47 = ''; show48 = ''; show49 = ''; show50 = '';
+             show51 = ''; show52 = '';  show53 = ''; show54 = ''; show55 = ''; show56 = ''; show57 = ''; show58 = ''; show59 = ''; show60 = ''; show61 = ''; show62 = ''; show63 = ''; show64 = ''; show65 = ''; show66 = ''; show67 = '';
+             show68 = ''; show69 = ''; show70 = ''; show71 = ''; show72 = ''; show73 = ''; show74 = ''; show75 = ''; show76 = ''; show77 = ''; show78 = ''; show79 = ''; show80 = ''; show81 = ''; show82 = ''; show83 = ''; show84 = '';
+             show85 = ''; show86 = ''; show87 = ''; show88 = ''; show89 = ''; show90 = ''; show91 = ''; show92 = ''; show93 = ''; show94 = ''; show95 = ''; show96 = ''; show97 = ''; show98 = ''; show99 = ''; show100 = ''; show101 = '';
+             show102 = ''; show103 = ''; show104 = ''; show105 = ''; show106 = ''; show107 = ''; show108 = ''; show109 = ''; show110 = ''; show111 = ''; show112 = ''; show113 = ''; othershow = '';
+        
+        //// end here //
+
+        // created all veriables for store record and handle events start from here  ////
+
+            test1 = ''; test2 = ''; test3 = ''; test4 = '';
+        
+             pbname = ''; presidenceadress = ''; pcityname = ''; pstatename = ''; pzipcode = ''; pemailid = ''; pcellphone = ''; phomephone = ''; pssnumber = ''; coborrower = ''; coresidenceaddress = ''; cocityname ='';
+             costatename = ''; cozipcode = ''; coemailaddress = ''; cocellphone = ''; cohomephone = ''; cossnumber = ''; pcreditscore = ''; cocreditscore = '';
+        
+             cozipcode = ''; coemailaddress = ''; cocellphone = ''; cohomephone = ''; cossnumber = ''; pcreditscore = ''; cocreditscore = '';
+        
+             propertyaddress = ''; propertycity = ''; propertystate = ''; propertycode = ''; propertyannualtax = ''; propertyannualhoi = ''; propertypurchaseprize = '';
+        
+            propertyestimates = ''; propertyloanamount = ''; propertyvalue = ''; propertymonthlyrental = ''; propertyasisvalue = ''; propertyprosedltv = '';
+          
+            annualincome = ''; conheachingacc = ''; savingaccount = ''; businessacc = ''; realestate = ''; totalassets = ''; iraacc = '';
+            mortgagesreal = ''; intallmectacc = ''; unpaidtax = '';  loanlifeins = ''; liabilities = ''; totalliabilities = ''; networth = '';
+        
+            judgmentdec = ''; obligationdec =''; bankmonthyr = ''; bankexplain =''; foreclosuremonyr = ''; forclosureexplain = ''; handlessexplain = '';
+            ssexplain = ''; crimemonthyr = ''; crimeexplain = ''; citizenorigin = ''; visastatus = '';
+        
+            propertytype1 = ''; purchasedate1 = ''; purchaseprice1 = ''; amountfinanced1 = ''; budget1 = ''; address1 = '';
+            btrackcity1 = ''; btrackstate1 = ''; btrackzipcode1 = ''; btrackename1 = ''; btrackownership1 = ''; btrackexit1 = ''; visastatusmonthlyrent1 = '';
+        
+            propertytype2 = ''; purchasedate2 = ''; purchaseprice2 = ''; amountfinanced2 = ''; budget2 = ''; address2 = '';
+            btrackcity2 = ''; btrackstate2 = ''; btrackzipcode2 = ''; btrackename2 = ''; btrackownership2 = ''; btrackexit2 = ''; visastatusmonthlyrent2 = '';
+        
+            propertytype3 = ''; purchasedate3 = ''; purchaseprice3 = ''; amountfinanced3 = ''; budget3 = ''; address3 = ''; btrackcity3 = '';
+            btrackstate3 = ''; btrackzipcode3 = ''; btrackename3 = ''; btrackownership3 = ''; btrackexit3 = ''; visastatusmonthlyrent3 = ''; othershows = '';
+        
+        // end here ////
+        
+            @track currentStep = '1';
+
+        // below code for run all handle event on all text box fields radio btn and checkboxs ///
+        
+        // Form section 1 // 
+
+            handlepbname(event){ this.pbname = event.target.value; this.show1 = this.pbname;}
+            handleraddress(event){this.presidenceadress = event.target.value; this.show2 = this.presidenceadress;}
+            handlepcityname(event){this.pcityname = event.target.value; this.show3 = this.pcityname;}
+            handlepstatename(event){this.pstatename = event.target.value; this.show4 = this.pstatename;}
+            handlepzipcode(event){this.pzipcode = event.target.value; this.show5 = this.pzipcode;}
+            handlepemailad(event){this.pemailid = event.target.value; this.show6 = this.pemailid;}
+            handlepcellphone(event){this.pcellphone = event.target.value; this.show7 = this.pcellphone;}
+            handlephomephone(event){this.phomephone = event.target.value; this.show8 = this.phomephone;}
+            handlepssnumber(event){this.pssnumber = event.target.value; this.show9 = this.pssnumber;}
+            handlecoborrower(event){this.coborrower = event.target.value; this.show10 = this.coborrower;}
+            handlecresidencead(event){this.coresidenceaddress = event.target.value;this.show11 = this.coresidenceaddress;}
+            handlecocityname(event){this.cocityname = event.target.value; this.show12 = this.cocityname;}
+            handlecostate(event){this.costatename = event.target.value; this.show13 = this.costatename;}
+            handlecoaizcode(event){this.cozipcode = event.target.value; this.show14 = this.cozipcode;}
+            handlecoemailad(event){this.coemailaddress = event.target.value; this.show15 = this.coemailaddress;}
+            handlecocellphone(event){this.cocellphone = event.target.value;this.show16 = this.cocellphone;}
+            handlecohomephone(event){this.cohomephone = event.target.value; this.show17 = this.cohomephone;}
+            handlecossnumber(event){this.cossnumber = event.target.value; this.show18 = this.cossnumber;}
+            handlepcreditscore(event){this.pcreditscore = event.target.value; this.show19 = this.pcreditscore;}
+            handlecocreditscore(event){this.cocreditscore = event.target.value; this.show20 = this.pcityname;}
+        
+          /////  Entity Information form section 2
+        
+            handleentityname(event){this.entityname = event.target.value; this.show21 = this.entityname;}
+            handleentityadress(event){this.entityaddress = event.target.value; this.show22 = this.entityaddress;}
+            handleencityname(event){this.entitycityname = event.target.value; this.show23 = this.entitycityname;}
+            handleenstatename(event){this.entitystatename = event.target.value;this.show24 = this.entitystatename;}
+            handleenzipcode(event){this.entityzipcode = event.target.value;this.show25 = this.entityzipcode;}
+            handleentityother(event){this.entityother = event.target.value; this.show26 = this.entityother;}
+            handleentityein(event){this.entityein = event.target.value; this.show27 = this.entityein;}
+        
+            ////  form 3 section ///
+        
+            handlepropertyaddress(event){this.propertyaddress = event.target.value;this.show28 = this.propertyaddress;}
+            handlepropertycity(event){this.propertycity = event.target.value;this.show29 = this.propertycity;}
+            handlepropertystate(event){this.propertystate = event.target.value;this.show30 = this.propertystate;}
+            handlepropertyzcode(event){this.propertycode = event.target.value; this.show31 = this.propertycode;}
+            handlepropertyannualtax(event){this.propertyannualtax = event.target.value; this.show32 = this.propertyannualtax;}
+            handlepropertyannualhoi(event){this.propertyannualhoi = event.target.value;this.show33 = this.propertyannualhoi;}
+            handlepropertypurchaseprize(event){this.propertypurchaseprize = event.target.value;this.show34 = this.propertypurchaseprize;}
+            handlepropertyestimates(event){this.propertyestimates = event.target.value;this.show35 = this.propertyestimates;}
+            handlepropertyloanamount(event){this.propertyloanamount = event.target.value;this.show36 = this.propertyloanamount;}
+            handlepropertyarvvalue(event){this.propertyvalue = event.target.value;this.show37 = this.propertyvalue;}
+            handlepropertymonthlyrental(event){this.propertymonthlyrental = event.target.value;this.show38 = this.propertymonthlyrental;}
+            handlepropertyasisvalue(event){this.propertyasisvalue = event.target.value;this.show39 = this.propertyasisvalue;}
+            handlepropertyproposedltv(event){this.propertyprosedltv = event.target.value;this.show40 = this.propertyprosedltv;}
+            handleother(event){this.othershows = event.target.value;this.othershow = this.othershows;}
+    
+        
+            // form section 4 //
+        
+            handleannualincome(event){this.annualincome = event.target.value;this.show41 = this.annualincome;}
+            handleconcheachingacc(event){this.conheachingacc = event.target.value;this.show42 = this.conheachingacc;}
+            handlesavingaccount(event){this.savingaccount = event.target.value;this.show43 = this.savingaccount;}
+            handlebusinessacc(event){this.businessacc = event.target.value;this.sho44 = this.businessacc;}
+            handlerealestate(event){this.realestate = event.target.value;this.show45 = this.realestate;}
+            handleiraacc(event){this.iraacc = event.target.value;this.show46 = this.iraacc;}
+            handletotalassets(event){this.totalassets = event.target.value;this.show47 = this.totalassets;}
+            handlemortgagesreal(event){this.mortgagesreal = event.target.value;this.show48 = this.mortgagesreal;}
+            handleintallmentacc(event){this.intallmectacc = event.target.value;this.show49 = this.intallmectacc;}
+            handleunpaidtax(event){this.unpaidtax = event.target.value;this.show50 = this.unpaidtax;}
+            handleloanlifeins(event){this.loanlifeins = event.target.value;this.show51 = this.loanlifeins;}
+            handleliabilities(event){this.liabilities = event.target.value;this.show52 = this.liabilities;}
+            handletotalliabilities(event){this.totalliabilities = event.target.value;this.show53 = this.totalliabilities;}
+            handlenetworth(event){this.networth = event.target.value;this.show54 = this.networth;}
+        
+            // form section 6 //
+        
+            handlenjudgmentdec(event){this.judgmentdec = event.target.value;this.show55 = this.judgmentdec;}
+            handleobligationdec(event){this.obligationdec = event.target.value;this.show56 = this.obligationdec;}
+            handlebankmonthyr(event){this.bankmonthyr = event.target.value;this.show57 = this.bankmonthyr;}
+            handlebankexplain(event){this.bankexplain = event.target.value;this.show58 = this.bankexplain;}
+            handleforeclosuremonyr(event){this.foreclosuremonyr = event.target.value;this.show59 = this.foreclosuremonyr;}
+            handleforclosureexplain(event){this.forclosureexplain = event.target.value;this.show60 = this.forclosureexplain;}
+            handlessmonthyr(event){this.ssmonthyr = event.target.value;this.show61 = this.ssmonthyr; }
+            handlessexplain(event){this.ssexplain = event.target.value;this.show62 = this.ssexplain;}
+            handlecrimemonthyr(event){this.crimemonthyr = event.target.value;this.show63 = this.crimemonthyr;}
+            handlecrimeexplain(event){this.crimeexplain = event.target.value;this.show64 = this.crimeexplain;}
+            handlecitizenorigin(event){this.citizenorigin = event.target.value;this.show65 = this.citizenorigin;}
+            handlevisastatus(event){this.visastatus = event.target.value;this.show66 = this.visastatus;}
+            
+            ////  form 7 section ///
+        
+            handlepropertytype1(event){this.propertytype1 = event.target.value;this.show67 = this.propertytype1;}
+            handlepurchasedate1(event){this.purchasedate1 = event.target.value;this.show68 = this.purchasedate1;}
+            handlepurchaseprice1(event){this.purchaseprice1 = event.target.value;this.show69 = this.purchaseprice1;}
+            handleamountfinanced1(event){this.amountfinanced1 = event.target.value;this.show70 = this.amountfinanced1;}
+            handlebudget1(event){this.budget1 = event.target.value;this.show71 = this.budget1;}
+            handleaddress1(event){this.address1 = event.target.value;this.show72 = this.address1;}
+            handlebtrackcity1(event){this.btrackcity1 = event.target.value;this.show73 = this.btrackcity1;}
+            handlebtrackstate1(event){this.btrackstate1 = event.target.value;this.show74 = this.btrackstate1;}
+            handlebtrackzipcode1(event){this.btrackzipcode1 = event.target.value;this.show75 = this.btrackzipcode1;}
+            handlebtrackename1(event){this.btrackename1 = event.target.value;this.show76 = this.btrackename1;}
+            handlebtrackownership1(event){this.btrackownership1 = event.target.value;this.show77 = this.btrackownership1;}
+            handlebtrackexit1(event){this.btrackexit1 = event.target.value;this.show78 = this.btrackexit1;}
+            handlevisastatusmonthlyrent1(event){this.visastatusmonthlyrent1 = event.target.value;this.show79 = this.visastatusmonthlyrent1;}
+            handlepropertytype2(event){this.propertytype2 = event.target.value;this.show80 = this.propertytype2;}
+            handlepurchasedate2(event){this.purchasedate2 = event.target.value;this.show81 = this.purchasedate2;}
+            handlepurchaseprice2(event){this.purchaseprice2 = event.target.value;this.show82 = this.purchaseprice2;}
+            handleamountfinanced2(event){this.amountfinanced2 = event.target.value;this.show83 = this.amountfinanced2;}
+            handlebudget2(event){this.budget2 = event.target.value;this.show84 = this.budget2;}
+            handleaddress2(event){this.address2 = event.target.value;this.show85 = this.address2;}
+            handlebtrackcity2(event){this.btrackcity2 = event.target.value;this.show86 = this.btrackcity2;}
+            handlebtrackstate2(event){this.btrackstate2 = event.target.value; this.show87 = this.btrackstate2;}
+            handlebtrackzipcode2(event){this.btrackzipcode2 = event.target.value;this.show88 = this.btrackzipcode2;}
+            handlebtrackename2(event){this.btrackename2 = event.target.value;this.show89 = this.btrackename2;}
+            handlebtrackownership2(event){this.btrackownership2 = event.target.value;this.show90 = this.btrackownership2;}
+            handlebtrackexit2(event){this.btrackexit2 = event.target.value;this.show91 = this.btrackexit2;}
+            handlevisastatusmonthlyrent2(event){this.visastatusmonthlyrent2 = event.target.value;this.show92 = this.visastatusmonthlyrent2;}
+        
+            handlepropertytype3(event){this.propertytype3 = event.target.value;this.show93 = this.propertytype3;}
+            handlepurchasedate3(event){this.purchasedate3 = event.target.value;this.show94 = this.purchasedate3;}
+            handlepurchaseprice3(event){this.purchaseprice3 = event.target.value;this.show95 = this.purchaseprice3;}
+            handleamountfinanced3(event){this.amountfinanced3 = event.target.value;this.show96 = this.amountfinanced3;}
+            handlebudget3(event){this.budget3 = event.target.value;this.show97 = this.budget3;}
+            handleaddress3(event){this.address3 = event.target.value;this.show98 = this.address3;}
+            handlebtrackcity3(event){this.btrackcity3 = event.target.valuethis.show99 = this.btrackcity3;}
+            handlebtrackstate3(event){this.btrackstate3 = event.target.value;this.show100 = this.btrackstate3;}
+            handlebtrackzipcode3(event){this.btrackzipcode3 = event.target.value;this.show101 = this.btrackzipcode3;}
+            handlebtrackename3(event){this.btrackename3 = event.target.value;this.show102 = this.btrackename3;}
+            handlebtrackownership3(event){this.btrackownership3 = event.target.value;this.show103 = this.btrackownership3;}
+            handlebtrackexit3(event){this.btrackexit3 = event.target.value;this.show104 = this.btrackexit3;}
+            handlevisastatusmonthlyrent3(event){this.visastatusmonthlyrent3 = event.target.value;this.show105 = this.visastatusmonthlyrent3;}
+        
+        
+            ///// form section 8 
+        
+            @track firmname = '';@track attoneyname = '';@track attoneyaddress = '';@track attorneyofficephone = '';@track attorneycity = '';@track attorneystate = '';@track attorneyemail = '';@track attorneyzipcode = '';
+           
+            handlefirmname(event){this.firmname = event.target.value;this.show106 = this.firmname;}
+            handleattoneyname(event){this.attoneyname = event.target.value;this.show107 = this.attoneyname;}
+            handleattorneyaddress(event){this.attoneyaddress = event.target.value;this.show108 = this.attoneyaddress;}
+            handleattorneyofficephone(event){this.attorneyofficephone = event.target.value;this.show109 = this.attorneyofficephone;}
+            handleviattorneycity(event){this.attorneycity = event.target.value;this.show110 = this.attorneycity;}
+            handleattorneystate(event){this.attorneystate = event.target.value;this.show111 = this.attorneystate;}
+            handleattorneyzipcode(event){this.attorneyzipcode = event.target.value;this.show112 = this.attorneyzipcode;}
+            handleattorneyemail(event){this.attorneyemail = event.target.value;this.show113 = this.attorneyemail;}
+        
+        // end here all event handle //
+        
+        ////   next and previous page btn handling here //
+               
+                handleOnStepClick(event) {this.currentStep = event.target.value;  }
+                get isStepOne() {return this.currentStep === "1";}
+                get isSteptwo() {return this.currentStep === "2";}
+                get isStepThree() {return this.currentStep === "3";}
+                get isStepFour() {return this.currentStep === "4";}
+                get isStepFive() {return this.currentStep === "5";}
+                get isStepSix() {return this.currentStep === "6";}
+                get isStepSeven() {return this.currentStep === "7";}
+                get isEnableNext() {return this.currentStep != "7";}
+                get isEnablePrev() {return this.currentStep != "1";}
+                get isEnableFinish() {return this.currentStep === "7";}
+                
+                handleNext(){
+                    if(this.currentStep == "1"){
+                        this.currentStep = "2";  
+                    }
+                    else if(this.currentStep == "2"){
+                        this.currentStep = "3";
+                    } else if(this.currentStep == "3"){
+                        this.currentStep = "4";
+                    } else if(this.currentStep == "4"){
+                        this.currentStep = "5";
+                    } else if(this.currentStep == "5"){
+                        this.currentStep = "6";
+                    } else if(this.currentStep = "6"){
+                        this.currentStep = "7";
+                    }
+                }
+                handlePrev(){
+                    if(this.currentStep == "7"){
+                        this.currentStep = "6";
+                    }
+                    else if(this.currentStep == "6"){
+                        this.currentStep = "5";
+                    }else if(this.currentStep == "5"){
+                        this.currentStep = "4";
+                    }else if(this.currentStep == "4"){
+                        this.currentStep = "3";
+                    }
+                    else if(this.currentStep == "3"){
+                        this.currentStep = "2";
+                    }
+                    else if(this.currentStep = "2"){
+                        this.currentStep = "1"; 
+                    }
+                }
+
+                // here i am getting all text box fields inbut values and checkboxs & radio btn
+
+                handleFinish(){
+
+        console.log("Primary Name"+this.pbname);
+        console.log("Primary residenceaddress"+this.presidenceadress);
+        console.log("Primary City Name"+this.pcityname);
+        console.log("Primary State Name"+this.pstatename);
+        console.log("Primary Zip code"+this.pzipcode);
+        console.log("Primary mail id"+this.pemailid);
+        console.log("Primary cellphone"+this.pcellphone);
+        console.log("Primary home phone"+this.phomephone);
+        console.log("Primary ss number"+this.pssnumber);
+        console.log("Coborrower Name"+this.coborrower);
+        console.log("Coborrower residence address"+this.coresidenceaddress);
+        console.log("Coborrower city Name"+this.cocityname);
+        console.log("Coborrower state Name"+this.costatename);
+        console.log("Coborrower zipcode"+this.cozipcode);
+        console.log("Coborrower email address "+this.coemailaddress);
+        console.log("Coborrower cellphone"+this.cocellphone);
+        console.log("Coborrower homephone"+this.cohomephone);
+        console.log("Coborrower ss number"+this.cossnumber);
+        console.log("primaryborrower creditscore"+this.pcreditscore);
+        console.log("Coborrower creditscore"+this.cocreditscore);
+                
+        console.log("Primary Married"+this.selectedValue)
+        console.log("Primary Experience"+this.selectedValue1)
+        console.log("Primary BK"+this.selectedValue2)
+        console.log("Coborrower Married1"+this.selectedValue3)
+        console.log("Coborrower Experience1"+this.selectedValue4)
+        console.log("Coborrower BK"+this.selectedValue5)
+        
+                  
+                  // 2 form record
+        console.log("Entity name"+this.entityname);
+        console.log("Entity address"+this.entityaddress);
+        console.log("Entity city name"+this.entitycityname);
+        console.log("Entity state name"+this.entitystatename);
+        console.log("Entity zip code"+this.entityzipcode);
+        console.log("Entity other"+this.entityother);
+        console.log("Entity EIN"+this.entityein);
+        console.log("Entity Individual"+this.selectedValue6);
+                  
+                  
+                  
+                  //3 form record
+        console.log("Property address"+this.propertyaddress);
+        console.log("Property city"+this.propertycity);
+        console.log("Property state"+this.propertystate);
+        console.log("Property zipcode"+this.propertycode);
+        console.log("Property annualtax"+this.propertyannualtax);
+        console.log("Property annualhoi"+this.propertyannualhoi);
+        console.log("Property purchaseprize"+this.propertypurchaseprize);
+        console.log("Property estimates"+this.propertyestimates);
+        console.log("Property loanamount"+this.propertyloanamount);
+        console.log("Property propertyvalue"+this.propertyvalue);
+        console.log("Property monthlyrental"+this.propertymonthlyrental);
+        console.log("Property asisvalue"+this.propertyasisvalue);
+        console.log("Property prosedltv"+this.propertyprosedltv); 
+        console.log("Property othershow"+this.othershows);
+        
+        console.log("Property propertytype"+this.selectedValue7)
+        console.log("Property exitstrategy"+this.selectedValue8)
+        console.log("Property gapfinancing"+this.selectedValue9)
+        console.log("Property Leased"+this.selectedradioValue1)
+                  
+                  // 4,5 form record
+        console.log("annual income"+this.annualincome);
+        console.log("Cheching Account"+this.conheachingacc);
+        console.log("Saving Account"+this.savingaccount);
+        console.log("Business Account"+this.businessacc);
+        console.log("Real State"+this.realestate);
+        console.log("IRA Account"+this.iraacc);
+        console.log("Total Assets"+this.totalassets);
+        console.log("Mortgages"+this.mortgagesreal);
+        console.log("Installment Account"+this.intallmectacc);
+        console.log("Unpaid Taxes"+this.unpaidtax);
+        console.log("Loan on Life ins"+this.loanlifeins);
+        console.log("Other liabilities"+this.liabilities);
+        console.log("Total liabilities"+this.totalliabilities);
+        console.log("Net Worth"+this.networth);
+        console.log("Self Employed"+this.selectedradioValue2);
+        
+        
+        // 6 form record
+        console.log("annual income"+this.judgmentdec);
+        console.log("Cheching Account"+this.obligationdec);
+        console.log("Saving Account"+this.bankmonthyr);
+        console.log("Business Account"+this.bankexplain);
+        console.log("Real State"+this.foreclosuremonyr);
+        console.log("IRA Account"+this.forclosureexplain);
+        console.log("Total Assets"+this.ssmonthyr);
+        console.log("Mortgages"+this.ssexplain);
+        console.log("Installment Account"+this.crimemonthyr);
+        console.log("Unpaid Taxes"+this.crimeexplain);
+        console.log("Loan on Life ins"+this.citizenorigin);
+        console.log("Other liabilities"+this.visastatus);
+
+        console.log("form 6 radio btn 1"+this.selectedradioValue3)
+        console.log("form 6 radio btn 2"+this.selectedradioValue4)
+        console.log("form 6 radio btn 3"+this.selectedradioValue5)
+        console.log("form 6 radio btn 4"+this.selectedradioValue6)
+        console.log("form 6 radio btn 5"+this.selectedradioValue7)
+        console.log("form 6 radio btn 6"+this.selectedradioValue8)                                   
+        console.log("form 6 radio btn 7"+this.selectedradioValue9)
+            
+        // 8 form record
+        
+        console.log("Firm Name"+this.firmname);
+        console.log("Attorney name"+this.attoneyname);
+        console.log("Address"+this.attoneyaddress);
+        console.log("Office Phone"+this.attorneyofficephone);
+        console.log("City"+this.attorneycity);
+        console.log("State"+this.attorneystate);
+        console.log("Zipcode"+this.attorneyzipcode);
+        console.log("Email"+this.attorneyemail);
+
+    /// end here 
+    // Object record save end here 
+
+                }
+// here we write the event codition for checking if address is same then click on check box it will copy & paste value to next input box fields
+
+                aredetailsvisible = true;
+             
+                checkcheckbox(event) {
+                   if (event.target.checked)
+              {
+                
+                 this.test1 = this.entityaddress; 
+                 this.test2 = this.entitycityname; 
+                 this.test3 = this.entitystatename; 
+                 this.test4 = this.entityzipcode; 
+            
+              }
+              else
+              {
+                this.test1 = ''; 
+                 this.test2 = '';
+                 this.test3 = '';
+                 this.test4 = ''; 
+              }
+                  
+                }
+               get selectedValues() {return this.value.join(',');}
+               handleChangeProperty(e) {
+                const __value = Array.from(e.detail.value)
+                    .filter((val) => val !== this.value[0]); 
+                this.value = __value;
+            }
+          
+    
+            
+    
+            
+           
+            
+             /// below code only for checkboxs ///
+                    //// form section 1 checkbox unable/disable /// 
+        
+            @api selectedValue; selectedValue1; selectedValue2; selectedValue3; selectedValue4; selectedValue5; selectedValue6; selectedValue7; selectedValue8; selectedValue9;
+                value = []; value1 = []; value2 = []; value3 = []; value4 = []; value5 = []; value6 = []; value7 = []; value8 = []; value9 = [];
+                userConditionsLWC = []; userConditionsLWC1 = []; userConditionsLWC2 = []; userConditionsLWC3 = []; userConditionsLWC4 = []; userConditionsLWC5 = []; userConditionsLWC6 = []; userConditionsLWC7 = []; userConditionsLWC8 = []; userConditionsLWC9 = [];
+    
+            ///// radio btn veriables
+             //// form section 1 checkbox unable/disable /// 
+    
+            @api selectedradioValue1; selectedradioValue2; selectedradioValue3; selectedradioValue4; selectedradioValue5; selectedradioValue6; selectedradioValue7; selectedradioValue8; selectedradioValue9; selectedradioValue0;
+                    radiovalue0 = []; radiovalue1 = []; radiovalue2 = []; radiovalue3 = [];  radiovalue4 = []; radiovalue5 = [];  radiovalue6 = []; radiovalue7 = []; radiovalue8 = []; radiovalue9 = [];
+                    radioConditionsLWC0 = []; radioConditionsLWC1 = []; radioConditionsLWC2 = []; radioConditionsLWC3 = []; radioConditionsLWC4 = []; radioConditionsLWC5 = []; radioConditionsLWC6 = []; radioConditionsLWC7 = []; radioConditionsLWC8 = []; radioConditionsLWC9 = [];
+    
+    
+            // rendering all values when user click on next and previous btn only for checkboxs and radio btn value
+
+                    renderedCallback() {
+                      
+                 
+                        const checkboxList = this.template.querySelectorAll(
+                            '[data-id^="checkbox"]'
+                          );
+                          for (const checkboxElement of checkboxList) {
+                
+                            if(checkboxElement.value == this.selectedValue) {
+                                checkboxElement.checked = true;
+                                console.log("i am in if part"+this.selectedValue)
+                            }
+                          }
+    
+                          // 1 checkbox 
+    
+                          const checkboxList1 = this.template.querySelectorAll(
+                            '[data-id^="none"]'
+                          );
+                          for (const checkboxElement of checkboxList1) {
+                
+                            if(checkboxElement.value == this.selectedValue1) {
+                                checkboxElement.checked = true;
+                                console.log("i am in if part"+this.selectedValue1)
+                            }
+                          }
+    
+                          
+                          // 2 checkbox 
+    
+                          const checkboxList2 = this.template.querySelectorAll(
+                            '[data-id^="BKy"]'
+                          );
+                          for (const checkboxElement of checkboxList2) {
+                
+                            if(checkboxElement.value == this.selectedValue2) {
+                                checkboxElement.checked = true;
+                                console.log("i am in if part"+this.selectedValue2)
+                            }
+                          }
+    
+                          
+                          // 3 checkbox 
+    
+                          const checkboxList3 = this.template.querySelectorAll(
+                            '[data-id^="married"]'
+                          );
+                          for (const checkboxElement of checkboxList3) {
+                
+                            if(checkboxElement.value == this.selectedValue3) {
+                                checkboxElement.checked = true;
+                                console.log("i am in if part married 1"+this.selectedValue3)
+                            }
+                          }
+    
+                          
+                          // 4 checkbox 
+    
+                          const checkboxList4 = this.template.querySelectorAll(
+                            '[data-id^="scales"]'
+                          );
+                          for (const checkboxElement of checkboxList4) {
+                
+                            if(checkboxElement.value == this.selectedValue4) {
+                                checkboxElement.checked = true;
+                                console.log("i am in if part"+this.selectedValue4)
+                            }
+                          }
+    
+                          
+                          // 5 checkbox 
+    
+                          const checkboxList5 = this.template.querySelectorAll(
+                            '[data-id^="bkcheck"]'
+                          );
+                          for (const checkboxElement of checkboxList5) {
+                
+                            if(checkboxElement.value == this.selectedValue5) {
+                                checkboxElement.checked = true;
+                                console.log("i am in if part bk"+this.selectedValue5)
+                            }
+                          }
+    
+                          
+                          // 6 checkbox 
+    
+                          const checkboxList6 = this.template.querySelectorAll(
+                            '[data-id^="Individual"]'
+                          );
+                          for (const checkboxElement of checkboxList6) {
+                
+                            if(checkboxElement.value == this.selectedValue6) {
+                                checkboxElement.checked = true;
+                                console.log("i am in if part"+this.selectedValue6)
+                            }
+                          }
+    
+                          
+                          // 7 checkbox 
+    
+                          const checkboxList7 = this.template.querySelectorAll(
+                            '[data-id^="propertytype"]'
+                          );
+                          for (const checkboxElement of checkboxList7) {
+                
+                            if(checkboxElement.value == this.selectedValue7) {
+                                checkboxElement.checked = true;
+                                this.detailsvisible = true
+                                console.log("i am in if part"+this.selectedValue7)
+                            }
+                          }
+    
+                          
+                          // 8 checkbox 
+    
+                          const checkboxList8 = this.template.querySelectorAll(
+                            '[data-id^="exitstrategy"]'
+                          );
+                          for (const checkboxElement of checkboxList8) {
+                
+                            if(checkboxElement.value == this.selectedValue8) {
+                                checkboxElement.checked = true;
+                                console.log("i am in if part"+this.selectedValue8)
+                            }
+                          }
+    
+                          // 9 checkbox 
+    
+                          const checkboxList9 = this.template.querySelectorAll(
+                            '[data-id^="gapfinancing"]'
+                          );
+                          for (const checkboxElement of checkboxList9) {
+                
+                            if(checkboxElement.value == this.selectedValue9) {
+                                checkboxElement.checked = true;
+                                console.log("i am in if part"+this.selectedValue9)
+                            }
+                          }
+    
+    
+                  //////  creating radio btn rendercall back section form 3 leased record 
+                  
+                  const radioList1 = this.template.querySelectorAll(
+                    '[data-id^="radiobtn1"]'
+                  );
+                  for (const checkboxElement of radioList1) {
+        
+                    if(checkboxElement.value == this.selectedradioValue1) {
+                        checkboxElement.checked = true;
+                        console.log("i am in if part 1"+this.selectedradioValue1)
+                    }
+                  }
+    //////   rendercall back section form 4 record 
+                  
+                  const radioList2 = this.template.querySelectorAll(
+                    '[data-id^="radiobtn2"]'
+                  );
+                  for (const checkboxElement of radioList2) {
+        
+                    if(checkboxElement.value == this.selectedradioValue2) {
+                        checkboxElement.checked = true;
+                        console.log("i am in if part 2"+this.selectedradioValue2)
+                    }
+                  }
+    
+                  ////// record 3  rendercall back section form 6 record
+                  
+                  const radioList3 = this.template.querySelectorAll(
+                    '[data-id^="radiobtn3"]'
+                  );
+                  for (const checkboxElement of radioList3) {
+        
+                    if(checkboxElement.value == this.selectedradioValue3) {
+                        checkboxElement.checked = true;
+                        console.log("i am in if part 3"+this.selectedradioValue3)
+                    }
+                  }
+    
+                 ////// record 4  rendercall back section form 6 record
+                  
+                  const radioList4 = this.template.querySelectorAll(
+                    '[data-id^="radiobtn4"]'
+                  );
+                  for (const checkboxElement of radioList4) {
+        
+                    if(checkboxElement.value == this.selectedradioValue4) {
+                        checkboxElement.checked = true;
+                        console.log("i am in if part"+this.selectedradioValue4)
+                    }
+                  }
+    
+                   ////// record 5  rendercall back section form 6 record 
+                  
+                   const radioList5 = this.template.querySelectorAll(
+                    '[data-id^="radiobtn5"]'
+                  );
+                  for (const checkboxElement of radioList5) {
+        
+                    if(checkboxElement.value == this.selectedradioValue5) {
+                        checkboxElement.checked = true;
+                        console.log("i am in if part"+this.selectedradioValue5)
+                    }
+                  }
+    
+                  ////// record 6  rendercall back section form 6 record
+    
+                  const radioList6 = this.template.querySelectorAll(
+                    '[data-id^="radiobtn6"]'
+                  );
+                  for (const checkboxElement of radioList6) {
+        
+                    if(checkboxElement.value == this.selectedradioValue6) {
+                        checkboxElement.checked = true;
+                        console.log("i am in if part"+this.selectedradioValue6)
+                    }
+                  }
+    
+                  ////// record 7  rendercall back section form 6 record
+    
+                  const radioList7 = this.template.querySelectorAll(
+                    '[data-id^="radiobtn7"]'
+                  );
+                  for (const checkboxElement of radioList7) {
+        
+                    if(checkboxElement.value == this.selectedradioValue7) {
+                        checkboxElement.checked = true;
+                        console.log("i am in if part"+this.selectedradioValue7)
+                    }
+                  }
+    
+                  ////// record 8  rendercall back section form 6 record
+    
+                  const radioList8 = this.template.querySelectorAll(
+                    '[data-id^="radiobtn8"]'
+                  );
+                  for (const checkboxElement of radioList8) {
+        
+                    if(checkboxElement.value == this.selectedradioValue8) {
+                        checkboxElement.checked = true;
+                        console.log("i am in if part"+this.selectedradioValue8)
+                    }
+                  }
+    
+                  ////// record 9  rendercall back section form 6 record
+    
+                  const radioList9 = this.template.querySelectorAll(
+                    '[data-id^="radiobtn9"]'
+                  );
+                  for (const checkboxElement of radioList9) {
+        
+                    if(checkboxElement.value == this.selectedradioValue9) {
+                        checkboxElement.checked = true;
+                        console.log("i am in if part"+this.selectedradioValue9)
+                    }
+                  }
+    
+    
+    
+                          
+                    }
+    
+    // 0 checkbox
+                    handleCheckbox(event) {
+        
+                        this.value = event.target ? event.target.value : "";
+                        this.userConditionsLWC = [];
+                        this.userConditionsLWC.push(this.value);
+                      
+                        const checkboxList = this.template.querySelectorAll(
+                          '[data-id^="checkbox"]'
+                        );
+        
+                       
+                        for (const checkboxElement of checkboxList) {
+                            checkboxElement.checked = false;
+                          }
+                          event.target.checked = true;
+                          this.selectedValue = event.target.value;
+                          console.log("Married"+this.selectedValue)
+                        }
+                       
+                 // 1 checkbox   
+        
+                 handleCheckbox1(event) {
+        
+                        this.value1 = event.target ? event.target.value : "";
+                        this.userConditionsLWC1 = [];
+                        this.userConditionsLWC1.push(this.value);
+                      
+                        const checkboxList = this.template.querySelectorAll(
+                          '[data-id^="none"]'
+                        );
+        
+                       
+                        for (const checkboxElement of checkboxList) {
+                            checkboxElement.checked = false;
+                          }
+                          event.target.checked = true;
+                          this.selectedValue1 = event.target.value;
+                          console.log("Experience"+this.selectedValue1)
+                        }
+        // 2 /////////////
+                        
+                    handleCheckbox2(event) {
+        
+                        this.value2 = event.target ? event.target.value : "";
+                        this.userConditionsLWC2 = [];
+                        this.userConditionsLWC2.push(this.value);
+                      
+                        const checkboxList = this.template.querySelectorAll(
+                          '[data-id^="BKy"]'
+                        );
+        
+                       
+                        for (const checkboxElement of checkboxList) {
+                            checkboxElement.checked = false;
+                          }
+                          event.target.checked = true;
+                          this.selectedValue2 = event.target.value;
+                          console.log("BK"+this.selectedValue2)
+                        }
+        
+        /// 3 ///////////
+        
+                    handleCheckbox3(event) {
+        
+                        this.value3 = event.target ? event.target.value : "";
+                        this.userConditionsLWC3 = [];
+                        this.userConditionsLWC3.push(this.value);
+                      
+                        const checkboxList = this.template.querySelectorAll(
+                          '[data-id^="married"]'
+                        );
+        
+                       
+                        for (const checkboxElement of checkboxList) {
+                            checkboxElement.checked = false;
+                          }
+                          event.target.checked = true;
+                          this.selectedValue3 = event.target.value;
+                          console.log("Married1"+this.selectedValue3)
+                        }
+        
+        /////4 /////////////
+        
+                   handleCheckbox4(event) {
+        
+                        this.value4 = event.target ? event.target.value : "";
+                        this.userConditionsLWC4 = [];
+                        this.userConditionsLWC4.push(this.value);
+                      
+                        const checkboxList = this.template.querySelectorAll(
+                          '[data-id^="scales"]'
+                        );
+        
+                       
+                        for (const checkboxElement of checkboxList) {
+                            checkboxElement.checked = false;
+                          }
+                          event.target.checked = true;
+                          this.selectedValue4 = event.target.value;
+                          console.log("Experience1"+this.selectedValue4)
+                        }
+        
+        
+        //// 5 ///////
+        
+        
+                    handleCheckbox5(event) {
+        
+                        this.value5 = event.target ? event.target.value : "";
+                        this.userConditionsLWC5 = [];
+                        this.userConditionsLWC5.push(this.value);
+                      
+                        const checkboxList = this.template.querySelectorAll(
+                          '[data-id^="bkcheck"]'
+                        );
+        
+                       
+                        for (const checkboxElement of checkboxList) {
+                            checkboxElement.checked = false;
+                          }
+                          event.target.checked = true;
+                          this.selectedValue5 = event.target.value;
+                          console.log("BK"+this.selectedValue5)
+                        }
+        
+        /////// 6 ////////
+        
+        
+        
+        
+                    handleCheckbox6(event) {
+        
+                        this.value6 = event.target ? event.target.value : "";
+                        this.userConditionsLWC6 = [];
+                        this.userConditionsLWC6.push(this.value);
+                      
+                        const checkboxList = this.template.querySelectorAll(
+                          '[data-id^="Individual"]'
+                        );
+        
+                       
+                        for (const checkboxElement of checkboxList) {
+                            checkboxElement.checked = false;
+                          }
+                          event.target.checked = true;
+                          this.selectedValue6 = event.target.value;
+                          console.log("Individual"+this.selectedValue6)
+                        }
+        
+        //////////////////// 7 //////////
+        
+        detailsvisible = false;
+        
+                    handleCheckbox7(event) {
+        
+                        this.value7 = event.target ? event.target.value : "";
+                        this.userConditionsLWC7 = [];
+                        this.userConditionsLWC7.push(this.value);
+                      
+                        const checkboxList = this.template.querySelectorAll(
+                          '[data-id^="propertytype"]'
+                        );
+        
+                       
+                        for (const checkboxElement of checkboxList) {
+                            checkboxElement.checked = false;
+                          }
+                          var a = event.target.checked = true;
+                          this.selectedValue7 = event.target.value;
+                          //this.detailsvisible = true;
+                          console.log("propertytype"+this.selectedValue7)
+    
+                          if (selectedValue7.value === "othershow" && this.a) {
+                            this.detailsvisible = true;
+                        } else {
+                            this.detailsvisible = false;
+                        }
+                    }
+    
+                          
+        
+        /////////////// 8 //////////
+        
+        handleCheckbox8(event) {
+        
+                        this.value8 = event.target ? event.target.value : "";
+                        this.userConditionsLWC8 = [];
+                        this.userConditionsLWC8.push(this.value);
+                      
+                        const checkboxList = this.template.querySelectorAll(
+                          '[data-id^="exitstrategy"]'
+                        );
+        
+                       
+                        for (const checkboxElement of checkboxList) {
+                            checkboxElement.checked = false;
+                          }
+                          event.target.checked = true;
+                          this.selectedValue8 = event.target.value;
+                          console.log("exitstrategy"+this.selectedValue8)
+                        }
+        
+        ////// 9 ////////
+             handleCheckbox9(event) {
+        
+                        this.value9 = event.target ? event.target.value : "";
+                        this.userConditionsLWC9 = [];
+                        this.userConditionsLWC9.push(this.value);
+                      
+                        const checkboxList = this.template.querySelectorAll(
+                          '[data-id^="gapfinancing"]'
+                        );
+        
+                       
+                        for (const checkboxElement of checkboxList) {
+                            checkboxElement.checked = false;
+                          }
+                          event.target.checked = true;
+                          this.selectedValue9 = event.target.value;
+                          console.log("gapfinancing"+this.selectedValue9)
+                        }
+               
+    
+    
+                
+            /// 1 section form 3 leased radio btn
+    
+            handleRadiobtn1(event) {
+        
+                this.radiovalue1 = event.target ? event.target.value : "";
+                this.radioConditionsLWC1 = [];
+                this.radioConditionsLWC1.push(this.value);
+              
+                const checkboxList = this.template.querySelectorAll(
+                  '[data-id^="radiobtn1"]'
+                );
+        
+               
+                for (const checkboxElement of checkboxList) {
+                    checkboxElement.checked = false;
+                  }
+                  event.target.checked = true;
+                  this.selectedradioValue1 = event.target.value;
+                  console.log("Leased"+this.selectedradioValue1)
+                }
+                
+                 /// 2 section form 4 self empl radio btn
+    
+            handleRadiobtn2(event) {
+        
+                this.radiovalue2 = event.target ? event.target.value : "";
+                this.radioConditionsLWC2 = [];
+                this.radioConditionsLWC2.push(this.value);
+              
+                const checkboxList = this.template.querySelectorAll(
+                  '[data-id^="radiobtn2"]'
+                );
+        
+               
+                for (const checkboxElement of checkboxList) {
+                    checkboxElement.checked = false;
+                  }
+                  event.target.checked = true;
+                  this.selectedradioValue2 = event.target.value;
+                  console.log("Self Employed"+this.selectedradioValue2)
+                }
+            
+                /// 3 function section form 6 radio btn
+    
+                handleRadiobtn3(event) {
+        
+                    this.radiovalue3 = event.target ? event.target.value : "";
+                    this.radioConditionsLWC3 = [];
+                    this.radioConditionsLWC3.push(this.value);
+                  
+                    const checkboxList = this.template.querySelectorAll(
+                      '[data-id^="radiobtn3"]'
+                    );
+            
+                   
+                    for (const checkboxElement of checkboxList) {
+                        checkboxElement.checked = false;
+                      }
+                      event.target.checked = true;
+                      this.selectedradioValue3 = event.target.value;
+                      console.log("Defendant in suits or judgment"+this.selectedradioValue3)
+                    }
+                
+                    
+                /// 4 function section form 6 radio btn
+    
+                handleRadiobtn4(event) {
+        
+                    this.radiovalue4 = event.target ? event.target.value : "";
+                    this.radioConditionsLWC4 = [];
+                    this.radioConditionsLWC4.push(this.value);
+                  
+                    const checkboxList = this.template.querySelectorAll(
+                      '[data-id^="radiobtn4"]'
+                    );
+            
+                   
+                    for (const checkboxElement of checkboxList) {
+                        checkboxElement.checked = false;
+                      }
+                      event.target.checked = true;
+                      this.selectedradioValue4 = event.target.value;
+                      console.log("Default on any financial obligation"+this.selectedradioValue4)
+                    }
+            
+    
+                    /// 5 function section form 6 radio btn
+    
+                handleRadiobtn5(event) {
+        
+                    this.radiovalue5 = event.target ? event.target.value : "";
+                    this.radioConditionsLWC5 = [];
+                    this.radioConditionsLWC5.push(this.value);
+                  
+                    const checkboxList = this.template.querySelectorAll(
+                      '[data-id^="radiobtn5"]'
+                    );
+            
+                   
+                    for (const checkboxElement of checkboxList) {
+                        checkboxElement.checked = false;
+                      }
+                      event.target.checked = true;
+                      this.selectedradioValue5 = event.target.value;
+                      console.log("Bankruptcy"+this.selectedradioValue5)
+                    }
+           
+                    /// 6 function form 6
+               
+                    handleRadiobtn6(event) {
+        
+                        this.radiovalue6 = event.target ? event.target.value : "";
+                        this.radioConditionsLWC6 = [];
+                        this.radioConditionsLWC6.push(this.value);
+                      
+                        const checkboxList = this.template.querySelectorAll(
+                          '[data-id^="radiobtn6"]'
+                        );
+                
+                       
+                        for (const checkboxElement of checkboxList) {
+                            checkboxElement.checked = false;
+                          }
+                          event.target.checked = true;
+                          this.selectedradioValue6 = event.target.value;
+                          console.log("Foreclosure"+this.selectedradioValue6)
+                        }
+    
+    /// 7 function form 6
+                        
+                handleRadiobtn7(event) {
+        
+                    this.radiovalue7 = event.target ? event.target.value : "";
+                    this.radioConditionsLWC7 = [];
+                    this.radioConditionsLWC7.push(this.value);
+                  
+                    const checkboxList = this.template.querySelectorAll(
+                      '[data-id^="radiobtn7"]'
+                    );
+            
+                   
+                    for (const checkboxElement of checkboxList) {
+                        checkboxElement.checked = false;
+                      }
+                      event.target.checked = true;
+                      this.selectedradioValue7 = event.target.value;
+                      console.log("Short Sale"+this.selectedradioValue7)
+                    }
+            
+    /// 8 function form 6
+                        
+    handleRadiobtn8(event) {
+        
+        this.radiovalue8 = event.target ? event.target.value : "";
+        this.radioConditionsLWC8 = [];
+        this.radioConditionsLWC8.push(this.value);
+      
+        const checkboxList = this.template.querySelectorAll(
+          '[data-id^="radiobtn8"]'
+        );
+    
+       
+        for (const checkboxElement of checkboxList) {
+            checkboxElement.checked = false;
+          }
+          event.target.checked = true;
+          this.selectedradioValue8 = event.target.value;
+          console.log("Convicted of a crime"+this.selectedradioValue8)
+        }
+    
+        /// 9 function form 6
+                        
+    handleRadiobtn9(event) {
+        
+        this.radiovalue9 = event.target ? event.target.value : "";
+        this.radioConditionsLWC9 = [];
+        this.radioConditionsLWC9.push(this.value);
+      
+        const checkboxList = this.template.querySelectorAll(
+          '[data-id^="radiobtn9"]'
+        );
+    
+       
+        for (const checkboxElement of checkboxList) {
+            checkboxElement.checked = false;
+          }
+          event.target.checked = true;
+          this.selectedradioValue9 = event.target.value;
+          console.log("Citizen"+this.selectedradioValue9)
+        }
+
+//// record type value store ////////       
+
+        @api recordId;
+        @api objectApiName;
+        @api serviceObject = Email_Address__c;
+    
+        @track objectInfo;
+        @track namefield1 = Primary_name;
+        @track namefield2 = Residence_address;
+        @track namefield3 = City_name;
+        @track namefield4 = State_name;
+        @track namefield5 = Zipcode;
+        @track namefield6 = email_id;
+    
+        fields = [Primary_name,Residence_address,City_name,,State_name,Zipcode,email_id];
+    
+        @wire(getObjectInfo, { objectApiName: Email_Address__c })
+        objectInfo;
+    
+        get recordTypeId() {
+            const rtis = this.objectInfo.data.recordTypeInfos;
+            return Object.keys(rtis).find(rti => rtis[rti].name === 'Primary_Borrower');
+        }
+
+        handleServiceCreated(){
+            const fields = {
+                'Primary_Borrower__c' :  this.accountName,
+                'Residence_Address__c': this.accountPhone,
+                'City__c' : this.accountFax,
+                'State__c': this.accountRevenue,
+                'Zip_Code__c': this.accountNumber, 
+                'Website' : this.accountWebsite,
+                'BillingCity' : this.accountBillingCity,
+                'BillingState': this.accountBillingState,                            
+                'BillingPostalCode': this.BillingPostalCode     
+            };
+
+const recordInput = { apiName : 'Account', fields};
+
+// Invoke the Method, to Insert the Record..
+createRecord(recordInput).then(result => {
+                                const showSuccessMessage = new ShowToastEvent({
+                                       title : 'success',
+                                       message : 'Record Inserted Successfully.',
+                                       variant : 'success',
+                                       mode : 'dismissable'
+                                });
+
+                                this.dispatchEvent(showSuccessMessage);
+                            })
+                        .catch(error => {
+                            const showFailureMessage = new ShowToastEvent({
+                                title : 'error',
+                                message : 'Error Occured Upon Insertion',
+                                variant : 'error',
+                                mode : 'dismissable'
+                            });
+
+                            this.dispatchEvent(showFailureMessage);
+                        })
+        }
+            
+            }
+
+
+
+
+------------------------------------------------------------------ Borrower_form.html --------------------------------------------------------------------------------------
+
+
+<template>
+	<div class="container">
+		<lightning-progress-indicator current-step={currentStep} type="base" variant="base">
+			<lightning-progress-step label="Step 1" value="1" onclick={handleOnStepClick}></lightning-progress-step>
+			<lightning-progress-step label="Step 2" value="2" onclick={handleOnStepClick}></lightning-progress-step>
+			<lightning-progress-step label="Step 3" value="3" onclick={handleOnStepClick}></lightning-progress-step>
+			<lightning-progress-step label="Step 4" value="4" onclick={handleOnStepClick}></lightning-progress-step>
+			<lightning-progress-step label="Step 5" value="5" onclick={handleOnStepClick}></lightning-progress-step>
+			<lightning-progress-step label="Step 6" value="6" onclick={handleOnStepClick}></lightning-progress-step>
+			<lightning-progress-step label="Step 7" value="7" onclick={handleOnStepClick}></lightning-progress-step>
+		</lightning-progress-indicator>
+
+		<!-- <lightning-card title="I.   BORROWER/GUARANTOR INFORMATION"></lightning-card> -->
+		<template if:true={isStepOne}>
+			<div class="container">
+                   
+                
+				<div class="nav">
+					<h1>I. &nbsp; BORROWER/GUARANTOR INFORMATION</h1>
+				</div>
+				<br/>
+				<div class="slds-grid slds-gutters">
+					<div class="slds-col">
+
+
+						<span>
+
+
+                   <ul>
+                   <li>
+                    <lightning-record-edit-form object-api-name={serviceObject} onsuccess={handleServiceCreated}>
+
+                    <label>Primary Borrower:</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <lightning-input-field field-name={namefield1} type="text"  value={show1} size="40"
+                            onchange={handlepbname}></lightning-input-field>
+                    <!-- <input type="text"  value={show1} size="40" onchange={handlepbname}></input> -->
+                   <br />
+                   <label for="address">Residence Address:</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                   <lightning-input-field field-name={namefield2} type="text"  value={show2} size="40"
+                            onchange={handleraddress}></lightning-input-field>
+                   <!-- <input type="text" value={show2}  size="40"  onchange={handleraddress}> -->
+                   
+                   <br />
+                  
+                   <label for="city">City:</label>&nbsp;&nbsp;&nbsp;
+                   <lightning-input-field field-name={namefield3} type="text"  value={show3} size="40"
+                   onchange={handlepcityname}></lightning-input-field>
+                   <!-- <input  type="text" value={show3} onchange={handlepcityname} size="13">&nbsp;&nbsp;&nbsp;&nbsp; -->
+                  
+                   <label for="state">State:</label>&nbsp;&nbsp;&nbsp;
+                   <lightning-input-field field-name={namefield4} type="text"  value={show4} size="40"
+                   onchange={handlepstatename}></lightning-input-field>
+                   <!-- <input type="text" value={show4} onchange={handlepstatename} size="13">&nbsp;&nbsp;&nbsp;&nbsp; -->
+                   <label >Zip Code:</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                   <lightning-input-field field-name={namefield5} type="text"  value={show5} size="40"
+                   onchange={handlepzipcode}></lightning-input-field>
+                   <!-- <input  type="text" value={show5} onchange={handlepzipcode} size="10"> -->
+               <br />
+               <label for="emailaddress">Email Address:</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+               <lightning-input-field field-name={namefield6} type="text"  value={show6} size="40"
+               onchange={handlepemailad}></lightning-input-field>
+               <input  type="email" value={show6} onchange={handlepemailad} size="40">
+               <br /><br />
+               <lightning-button type="submit" variant="brand" label="Create Account"></lightning-button>
+               </lightning-record-edit-form>
+               </li>
+               </ul>
+              
+          
+           </span>
+					</div>
+
+					<div class="slds-col">
+						<span>
+
+
+
+                        <ul>
+                        <li>
+        
+                         <label >Cell Phone:</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                         <input  type="text" value={show7} onchange={handlepcellphone} size="20">
+                        <br />
+                      
+                        <label >Home Phone:</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                         <input  type="number" value={show8} onchange={handlephomephone} size="20">
+                        <br />
+                       
+                        <label >Social Security Number:</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                         <input  type="tel" value={show9} onchange={handlepssnumber} size="20">
+                        <br/>
+                      
+                        <label>Are you Married: </label> &nbsp;&nbsp;&nbsp;&nbsp;
+                        <label>Yes: </label>
+                        <input type="checkbox"   value="yes"  data-id="checkbox" onchange={handleCheckbox} />
+                        <label>No: </label>
+                        <input type="checkbox"   value="no" data-id="checkbox" onchange={handleCheckbox} />
+                        
+                        <br />
+                    </li>
+                    </ul>
+                    
+               
+        </span>
+					</div>
+				</div>
+				<div class="slds-col slds-size_1-of-1">
+					<span>
+    <label>Experience: </label> &nbsp;&nbsp;
+                 <label>None: </label>&nbsp;&nbsp;
+                 <input type="checkbox"  data-id ="none"  value="none"  onchange={handleCheckbox1} />
+                 &nbsp;&nbsp;
+                 <label>1-3 Deals: </label>&nbsp;&nbsp;
+                 <input type="checkbox"  data-id ="none"  value="1-3 Deals" onchange={handleCheckbox1} />&nbsp;&nbsp;
+                 <label>5+ Deals: </label>&nbsp;&nbsp;
+                 <input type="checkbox"  data-id ="none" value="5+ Deals:" onchange={handleCheckbox1} />&nbsp;&nbsp;
+                 <label>BK OR F/C Last 36 Months: </label> &nbsp;&nbsp;
+                 <label>Y: </label>&nbsp;&nbsp;
+                 <input type="checkbox"  data-id ="BKy"  value="Y" onchange={handleCheckbox2} />&nbsp;&nbsp;
+                 <label>N: </label>&nbsp;&nbsp;
+                 <input type="checkbox"  data-id ="BKy"  value="N" onchange={handleCheckbox2} /> &nbsp;&nbsp;
+                 <label >Credit Score:</label>&nbsp;&nbsp;
+            <input  type="text" value={show19} name="credit score:" onchange={handlepcreditscore}>  
+                 </span>
+				</div><br/>
+
+
+				<div class="slds-grid slds-gutters">
+					<div class="slds-col">
+						<span>
+                
+            <ul>
+            <li>
+
+             <label >Co Borrower:</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+             <input  type="text" value={show10} onchange={handlecoborrower} name="name" size="40">
+                <br />
+                <label >Residence Address:</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <input  type="text" value={show11} onchange={handlecresidencead} size="40" >
+            
+                <br />
+               
+                <label >City:</label>&nbsp;&nbsp;&nbsp;
+                   <input  type="text" value={show12} onchange={handlecocityname} size="13">&nbsp;&nbsp;&nbsp;&nbsp;
+                   <label for="state">State:</label>&nbsp;&nbsp;&nbsp;
+                   <input type="text" value={show13} onchange={handlecostate} size="13">&nbsp;&nbsp;&nbsp;&nbsp;
+                   <label >Zip Code:</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                   <input  type="text" value={show14} onchange={handlecoaizcode} size="10">
+            <br />
+            <label for="emailaddress">Email Address:</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="email" value={show15} onchange={handlecoemailad} size="40">
+            <br /><br />
+            </li>
+            </ul>
+        </span>
+					</div>
+
+
+					<div class="slds-col">
+						<span>
+                <ul>
+                <li>
+
+                    <label >Cell Phone:</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input  type="tel" value={show16} onchange={handlecocellphone} size="20">
+                   <br />
+                 
+                   <label >Home Phone:</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input  type="number" value={show17} onchange={handlecohomephone} size="20">
+                   <br />
+                   
+                   <label for="phone">Social Security Number:</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input  type="number" value={show18} onchange={handlecossnumber} size="20" >
+                   <br />
+                   
+                   <label>Are you Married: </label> &nbsp;&nbsp;&nbsp;&nbsp;
+                   <label>Yes: </label>
+                   <input type="checkbox"  data-id="married" value="yes"  onchange={handleCheckbox3} >
+                   <label>No: </label>
+                   <input type="checkbox" data-id="married" value="no"  onchange={handleCheckbox3}  >
+                   
+                
+                
+                <br />
+            </li>
+            </ul>
+        </span>
+					</div>
+				</div>
+				<div class="slds-col slds-size_1-of-1">
+					<span>
+                <label>Experience: </label> &nbsp;&nbsp;
+                             <label>None: </label>&nbsp;&nbsp;
+                             <input type="checkbox"  data-id="scales" value="None"  onchange={handleCheckbox4} >&nbsp;&nbsp;
+                             <label>1-3 Deals: </label>&nbsp;&nbsp;
+                             <input type="checkbox" data-id="scales" value="1-3 Deals"  onchange={handleCheckbox4} >&nbsp;&nbsp;
+                             <label>5+ Deals: </label>&nbsp;&nbsp;
+                             <input type="checkbox" data-id="scales" value="5+ Deals"  onchange={handleCheckbox4} >&nbsp;&nbsp;
+                             <label>BK OR F/C Last 36 Months: </label> &nbsp;&nbsp;
+                             <label>Y: </label>&nbsp;&nbsp;
+                             <input type="checkbox"  data-id="bkcheck" value="Y"  onchange={handleCheckbox5} >&nbsp;&nbsp;
+                             <label>N: </label>&nbsp;&nbsp;
+                             <input type="checkbox" data-id="bkcheck" value="N"  onchange={handleCheckbox5}> &nbsp;&nbsp;
+                             <label for="state">Credit Score:</label>&nbsp;&nbsp;
+                        <input  type="text" value={show20}  onchange={handlecocreditscore} name="credit score:">  <br/>
+                             </span>
+				</div>
+
+
+
+			</div>
+		</template>
+
+		<!-- /////////////////  2nd form start from here //////////////// -->
+		<template if:true={isSteptwo}>
+			<div class="container">
+				<div class="nav">
+					<h1>II. &nbsp; ENTITY/COMPANY INFORMATION</h1>
+				</div>
+				<br/>
+				<div class="slds-grid slds-gutters">
+					<div class="slds-col">
+
+						<span>
+                                           <ul>
+                                           <li>
+                                            <label >Entity Name:</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                             <!-- <input  type="text" value={show19} data-id="input19" size="40">  -->
+											 <input  type="text" value={show21} onchange={handleentityname} size="40"> 
+                                           <br />
+                                           <p></p>
+                                           <label>Individual:</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                           <label>Partnership: </label>&nbsp;&nbsp;
+                                            <input type="checkbox" data-id="Individual" value="partnership"  onchange={handleCheckbox6}>&nbsp;&nbsp;
+                                            <label>Corporation: </label>&nbsp;&nbsp;
+                                            <input type="checkbox"  data-id="Individual" value="corporation"  onchange={handleCheckbox6} >&nbsp;&nbsp;
+                                            <label>LLC: </label>&nbsp;&nbsp;
+                                            <input type="checkbox" data-id="Individual" value="llc"  onchange={handleCheckbox6} > &nbsp;&nbsp;
+                                            <label>Other:</label>&nbsp;&nbsp;
+                                            <input type="checkbox" data-id="Individual" value="other"  onchange={handleCheckbox6}> &nbsp;&nbsp;
+                                            <input  type="text" value={show26} onchange={handleentityother} >&nbsp;&nbsp;
+                                            <label >EIN:</label>&nbsp;&nbsp;
+                                            <input  type="text" value={show27} onchange={handleentityein} >&nbsp;&nbsp;
+                                           <br />
+                                           </li>
+                                           </ul>
+                                        </span>
+						<p></p>
+					</div>
+				</div>
+
+				<div class="slds-col slds-size_1-of-1">
+					<span>
+                                    <ul>
+                                        <li>
+                                            <label >Entity Address:</label>&nbsp;&nbsp;&nbsp;
+                                           <input  type="text" value={show22} onchange={handleentityadress}>&nbsp;&nbsp;&nbsp;
+                                           
+                                           <label >City:</label>&nbsp;&nbsp;&nbsp;
+                                           <input  type="text" value={show23} onchange={handleencityname} >&nbsp;&nbsp;&nbsp;
+                                         
+                                           <label >State:</label>&nbsp;&nbsp;&nbsp;
+                                           <input   type="text" value={show24} onchange={handleenstatename}>&nbsp;&nbsp;&nbsp;
+                                           
+                                           <label >Zip Code:</label>&nbsp;&nbsp;&nbsp;
+                                           <input  type="text" value={show25} onchange={handleenzipcode} size="10">&nbsp;&nbsp;&nbsp;&nbsp;
+                                       
+                                       </li>
+                                       </ul>
+                                      <p></p>
+                                  </span>
+				</div>
+
+
+				<div class="slds-col slds-size_1-of-1">
+					<span>
+                                        <ul>
+                                            <li>
+            <label >Billing Address (check here if same</label>&nbsp;&nbsp;
+                                            
+                                            <input type="checkbox" onchange={checkcheckbox}>)&nbsp;&nbsp; 
+                                            <!-- <input type="checkbox" >)&nbsp;&nbsp; -->
+                                           
+                                        </li>
+                                    </ul>
+                                   
+                               </span>
+				</div>
+				<template if:true={aredetailsvisible}>
+
+
+
+					<div class="slds-col slds-size_1-of-1">
+						<span>
+                                        <ul>
+                                            <li>
+                                                <label >Entity Address:</label>&nbsp;&nbsp;&nbsp;
+                                               <input  type="text" value={test1} >&nbsp;&nbsp;&nbsp;
+                                               
+                                               <label >City:</label>&nbsp;&nbsp;&nbsp;
+                                               <input  type="text" value={test2} >&nbsp;&nbsp;&nbsp;
+                                             
+                                               <label >State:</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                                               <input   type="text" value={test3} >&nbsp;&nbsp;&nbsp;&nbsp;
+                                               
+                                               <label >Zip Code:</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                                               <input  type="text" value={test4} size="10">&nbsp;&nbsp;&nbsp;&nbsp;
+                                           
+                                           </li>
+                                           </ul>
+                                          
+                                      </span>
+					</div>
+				</template>
+
+
+			</div>
+
+		</template>
+
+
+
+		<template if:true={isStepThree}>
+			<!-- /////////// 3rd form start from here /////////// -->
+
+			<div class="container">
+				<div class="nav">
+					<h1>III. &nbsp; BUSINESS PLAN FOR PROPERTY (Details will be reviewed with max LTV)</h1>
+				</div>
+				<br/>
+				<div class="slds-grid slds-gutters">
+					<div class="slds-col">
+
+						<span>
+
+                              <ul>
+                                  <li>
+
+                              <label>Property Address: </label> &nbsp;&nbsp; &nbsp;&nbsp;
+                  <input  name="" class="inputfild1 " value={show28} type="text" size="20" onchange={handlepropertyaddress}/> &nbsp;
+                  <label>Property Type: </label>
+                  &nbsp;&nbsp;&nbsp;
+                  
+                  <label>SFR </label>
+                   &nbsp;&nbsp;
+                   <input type="checkbox"  data-id ="propertytype"   value="SFR"  onchange={handleCheckbox7} /> &nbsp;&nbsp;&nbsp;&nbsp;
+                  
+ &nbsp;&nbsp;&nbsp;&nbsp;
+                   <label>MF3  </label>
+                   &nbsp;&nbsp;
+                   <input type="checkbox"  data-id ="propertytype"  value="MF3"  onchange={handleCheckbox7} /> 
+                   
+                   
+                  &nbsp;&nbsp; &nbsp;&nbsp;
+                    <label>MF4  </label>
+                   &nbsp;&nbsp;&nbsp;
+                   <input type="checkbox"  data-id ="propertytype"  value="MF4"  onchange={handleCheckbox7} /> 
+                  
+                   &nbsp;&nbsp; 
+                   <label> OTHER </label>
+                   &nbsp;&nbsp;
+                   <input type="checkbox"  data-id ="propertytype"   value="Others"  onchange={handleCheckbox7} /> 
+        
+                   <template if:true={detailsvisible}>
+                      &nbsp;&nbsp;
+                          <!-- <input  name="" class="inputfild1" type="text" size="14"/> -->
+                          <input  name="" class="inputfild1 " type="text" size="8" value=othershow  onchange={handleother}/>
+                   </template>
+                   
+                 
+                  <br />
+                  <label>City: </label>
+                  <input  name="" class="inputfild1 " type="text" value={show29}  onchange={handlepropertycity} /> &nbsp;
+                  <label>State: </label>
+                  <input  name="" class="inputfild1 " type="text" size="8" value={show30}  onchange={handlepropertystate}/> 
+                  <label>Zip Code: </label>
+                  <input  name="" class="inputfild1 " type="text" size="12" value={show31}  onchange={handlepropertyzcode}/> &nbsp;&nbsp;
+                  <label>Annual Taxes:  </label>
+                  <input  name="" class="inputfild1 " type="text" size="10" value={show32}  onchange={handlepropertyannualtax} placeholder="$"/> 
+                  <label>Annual HOI: </label>
+                  <input  name="" class="inputfild1 " type="text" size="10" value={show33} onchange={handlepropertyannualhoi} placeholder="$" /> &nbsp;
+                  <br />
+                  <label>Purchase: </label>
+                  <input type="checkbox"  name="" value="Yes" /> &nbsp; 
+                   &nbsp; &nbsp; &nbsp; 
+                  <label>Purchase/Rehab: </label>
+                  <input type="checkbox"  name="" value="Yes"  checked/> &nbsp; 
+                   &nbsp; &nbsp; &nbsp; 
+                   <label>Cash Out: </label>
+                  <input type="checkbox"  name="" value="Yes" /> &nbsp; 
+                   &nbsp; &nbsp; &nbsp; 
+                   <label>Refinance: </label>
+                  <input type="checkbox"  name="" value="Yes" /> &nbsp; 
+                   &nbsp; &nbsp; &nbsp; 
+                   &nbsp; &nbsp; &nbsp; 
+                   <label>New Construction: </label>
+                  <input type="checkbox"  name="" value="Yes" /> &nbsp; 
+                   &nbsp; &nbsp; &nbsp; 
+                   &nbsp; &nbsp; &nbsp; 
+                   <label>Rehab Only: </label>
+                  <input type="checkbox"  name="" value="Yes" /> &nbsp; 
+                  <br />
+                  <label>Purchase Prize: </label>
+                  <input  name="" class="inputfild1 " type="text" size="40" value={show34}  onchange={handlepropertypurchaseprize} placeholder="$"/>  &nbsp;&nbsp;&nbsp;&nbsp;
+                  <label>Estimates Rehab: </label>
+                  <input  name="" class="inputfild1 " type="text" size="40" value={show35} onchange={handlepropertyestimates} placeholder="$"/>  
+                  <br />
+                  <label>Loan Amount:</label>
+                  <input  name="" class="inputfild1 " type="text" size="40" value={show36} onchange={handlepropertyloanamount} placeholder="$"/>  &nbsp;&nbsp;&nbsp;&nbsp;
+                  <label>ARV Value: &nbsp;&nbsp;  </label>
+                  <input  name="" class="inputfild1 " type="text" size="40" value={show37} onchange={handlepropertyarvvalue} placeholder="$"/> 
+                  <br/>
+
+                  <label>Leased: </label> &nbsp;&nbsp;&nbsp;&nbsp; 
+                  <label>Yes: </label>&nbsp;&nbsp;&nbsp;&nbsp;
+                  <input type="radio"   value="yes"  data-id="radiobtn1" onchange={handleRadiobtn1} />&nbsp;&nbsp;&nbsp;&nbsp;
+                  <label>No: </label>&nbsp;&nbsp;&nbsp;&nbsp;
+                  <input type="radio"    value="no" data-id="radiobtn1" onchange={handleRadiobtn1} />
+                  &nbsp;&nbsp;&nbsp;&nbsp;
+                  <label>Monthly Rental: &nbsp;&nbsp;$ </label>
+                  <input  name="" class="inputfild1 " type="text" value={show38}  onchange={handlepropertymonthlyrental} placeholder="$"/>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  <label>As-is Value: &nbsp;&nbsp; </label>
+                  <input  name="" class="inputfild1 " type="text" size="10" value={show39}  onchange={handlepropertyasisvalue} placeholder="$"/>  &nbsp;&nbsp;
+                  <label>Proposed LTV: </label>
+                  <input  name=""  class="inputfild1 " type="text" size="10" value={show40}  onchange={handlepropertyproposedltv}/>  
+
+                  <br/>
+                  <label>Exit Strategy: </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  <label>Wholesale/R &nbsp; Refinance: </label>
+                  <input  data-id="exitstrategy" class="inputfild1 " type="checkbox"   value="Wholesale"  onchange={handleCheckbox8}/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  <label>Other: </label>
+                  <input type="checkbox"  data-id="exitstrategy" value="Other"   onchange={handleCheckbox8} /> &nbsp;
+                   &nbsp; &nbsp; &nbsp; 
+                   <label>Gap Financing?</label>&nbsp; &nbsp; &nbsp;&nbsp;
+                   <label>Yes </label>&nbsp; <input type="checkbox"  data-id="gapfinancing" value="Yes"  onchange={handleCheckbox9}/>
+                  &nbsp;  &nbsp; 
+                  <label>No </label>&nbsp;<input type="checkbox" data-id="gapfinancing" value="No"  onchange={handleCheckbox9}/>
+                  <br/>
+                  &nbsp;  &nbsp; &nbsp;  &nbsp; &nbsp;  &nbsp; &nbsp;&nbsp;&nbsp; &nbsp;  &nbsp; &nbsp;  &nbsp; &nbsp;&nbsp;
+                  &nbsp; &nbsp;  &nbsp; &nbsp;  &nbsp; &nbsp;&nbsp;<label>e-Sale: </label>
+                  <input type="checkbox"  name="" value="Yes" />
+
+</li>
+</ul>
+
+
+
+
+                                </span>
+					</div>
+				</div>
+			</div>
+
+
+		</template>
+		<!-- ////////////////////  4th form start from here ////////////////// -->
+		<template if:true={isStepFour}>
+			<div class="container">
+				<div class="slds-grid slds-wrap">
+
+
+					<div class="slds-col slds-size_1-of-2">
+						<div class="nav">
+							<h1>IV. &nbsp; FINANCIAL ASSETS</h1>
+						</div>
+                        <br/>
+						<span>
+
+
+                                    <ul>
+                                        <li> 
+                         
+
+                                             
+                                    <label class="radio">Self Employed: </label> 
+                                    <label>Yes: </label>&nbsp;&nbsp;&nbsp;&nbsp;
+                  <input type="radio"   value="yes"  data-id="radiobtn2" onchange={handleRadiobtn2} />&nbsp;&nbsp;&nbsp;&nbsp;
+                  <label>No: </label>&nbsp;&nbsp;&nbsp;&nbsp;
+                  <input type="radio"    value="no" data-id="radiobtn2" onchange={handleRadiobtn2} />
+                  &nbsp;&nbsp;&nbsp;&nbsp;
+
+                                    <br />
+
+	<label class="label">Annual Income(s): </label>
+	<input  name="" class="inputfild " type="text" value={show41} onchange={handleannualincome}/>
+	<br />
+	<label class="label">Cash on hand & Cheching Account(s): </label>
+	<input name="" class="inputfild " type="text" value={show42} onchange={handleconcheachingacc}/>
+	<br />
+	<label class="label">Savings Account(s): </label>
+	<input name=""  class="inputfild " type="text" value={show43} onchange={handlesavingaccount}/>
+	<br />
+	<label class="label">Business Account(s): </label>
+	<input name="" class="inputfild " type="text" value={show44} onchange={handlebusinessacc}/>
+	<br />
+	<label class="label">Real Estate: </label>
+	<input name="" class="inputfild " type="text" value={show45} onchange={handlerealestate}/>
+	<br />
+	<label class="label">401K/IRA Account: </label>
+	<input name="" class="inputfild " type="text" value={show46} onchange={handleiraacc}/><br />
+	<label class="label">Total Assets: </label>
+	<input name=""  class="inputfild " placeholder="$" type="text" value={show47} onchange={handletotalassets}/>
+
+
+
+	</li>
+	</ul>
+
+	</span>
+	</div>
+
+
+
+
+	<!-- </div> -->
+
+	<!-- <div class="container">   -->
+
+
+
+	<div class="slds-col slds-size_1-of-2">
+		<div class="nav">
+			<h1>V. &nbsp; FINANCIAL DEBT</h1>
+		</div>
+		<span>
+
+                                <ul>
+                                <li> 
+                                    <label class="label">Mortgages on Real Estate: </label>
+                            <input  name="" class="inputfild " type="text" value={show48} onchange={handlemortgagesreal} />
+                            <br />
+                            <label class="label">Installment Accounts: </label>
+                            <input  name="" class="inputfild " type="text" value={show49} onchange={handleintallmentacc}/>
+                            <br />
+                            <label class="label">Unpaid Taxes: </label>
+                            <input name="" class="inputfild " type="text" value={show50} onchange={handleunpaidtax}/>
+                            <br />
+                            <label class="label">Loan on Life Insurance: </label>
+                            <input name="" class="inputfild " type="text" value={show51} onchange={handleloanlifeins}/>
+                            <br />
+                            <label class="label">Other Liabilities: </label>
+                            <input name="" class="inputfild " type="text" value={show52} onchange={handleliabilities}/>
+                            <br />
+                            <label class="label">Total Liabilities:</label>
+                            <input name="" class="inputfild " placeholder="$" type="text"  value={show53} onchange={handletotalliabilities}/>
+                            <br />
+                           <br/>
+                            <br />
+                            <label class="label">Net Worth: </label>
+                            <input name="" class="inputfild " placeholder="$" type="text" value={show54} onchange={handlenetworth} />
+                            
+                           
+                        
+                        </li>
+                    </ul>
+                   </span>
+	</div>
+	</div>
+
+	</div>
+</template>
+
+
+<!-- /////////////////  6,7,8 form start from here //////////////// -->
+
+
+<template if:true={isStepFive}>
+	<div class="container">
+
+
+
+		<div class="nav">
+			<h1>&nbsp;&nbsp; VI.&nbsp; &nbsp;&nbsp;BORROWER DECELARATIONS</h1>
+		</div><br>
+		<div class="slds-col slds-size_1-of-1">
+			<span>
+                    <ul>
+                        <li>
+
+                       
+                    <label>Defendant in suits or judgment? &nbsp;&nbsp;&nbsp;&nbsp;</label>
+                    <label>Yes: </label>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="radio"   value="yes"  data-id="radiobtn3" onchange={handleRadiobtn3} />&nbsp;&nbsp;&nbsp;&nbsp;
+                    <label>No: </label>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="radio"    value="no" data-id="radiobtn3" onchange={handleRadiobtn3} />
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <label>Description: </label>
+                    <input  type="text" size="40" value={show55} onchange={handlenjudgmentdec}>
+               
+                    <br>
+                   
+                    <label>Default on any financial obligation? &nbsp;&nbsp;&nbsp;&nbsp;</label>
+                    <label>Yes: </label>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="radio"   value="yes"  data-id="radiobtn4" onchange={handleRadiobtn4} />&nbsp;&nbsp;&nbsp;&nbsp;
+                    <label>No: </label>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="radio"    value="no" data-id="radiobtn4" onchange={handleRadiobtn4} />
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <label>Description: </label>
+                    <input  type="text" size="40" value={show56} onchange={handleobligationdec}>
+                 
+                    <br>
+                    
+                    <label>Bankruptcy? &nbsp;&nbsp;&nbsp;</label>
+                    <label>Yes: </label>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="radio"   value="yes"  data-id="radiobtn5" onchange={handleRadiobtn5} />&nbsp;&nbsp;&nbsp;&nbsp;
+                    <label>No: </label>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="radio"    value="no" data-id="radiobtn5" onchange={handleRadiobtn5} />
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <label>Month/Year:</label>
+                    <input name="Month/Year:" type="text" size="20" value={show57} onchange={handlebankmonthyr}>
+                    &nbsp;&nbsp;
+                    <label>Explain: </label>
+                    <input  type="text" size="20" value={show58} onchange={handlebankexplain}>
+                    
+                    <br>
+                    
+                    <label>Foreclosure? &nbsp;&nbsp;&nbsp;</label>
+                    <label>Yes: </label>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="radio"   value="yes"  data-id="radiobtn6" onchange={handleRadiobtn6} />&nbsp;&nbsp;&nbsp;&nbsp;
+                    <label>No: </label>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="radio"    value="no" data-id="radiobtn6" onchange={handleRadiobtn6} />
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <label>Month/Year:</label>
+                    <input name="Month/Year:" type="text" size="20" value={show59} onchange={handleforeclosuremonyr}>
+                    &nbsp;&nbsp;
+                    <label>Explain: </label>
+                    <input  type="text" size="20" value={show60} onchange={handleforclosureexplain}>
+                    
+                    <br>
+                  
+                    <label>Short Sale? &nbsp;&nbsp;&nbsp;&nbsp;</label>
+                    <label>Yes: </label>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="radio"   value="yes"  data-id="radiobtn7" onchange={handleRadiobtn7} />&nbsp;&nbsp;&nbsp;&nbsp;
+                    <label>No: </label>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="radio"    value="no" data-id="radiobtn7" onchange={handleRadiobtn7} />
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <label>Month/Year:</label>
+                    <input type="text" size="20" value={show61} onchange={handlessmonthyr}>
+                    &nbsp;&nbsp;
+                    <label>Explain: </label>
+                    <input  type="text" size="20" value={show62} onchange={handlessexplain}>
+                   
+                    <br>
+                    
+                    <label>Convicted of a crime? &nbsp;&nbsp;&nbsp;&nbsp;</label>
+                    <label>Yes: </label>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="radio"   value="yes"  data-id="radiobtn8" onchange={handleRadiobtn8} />&nbsp;&nbsp;&nbsp;&nbsp;
+                    <label>No: </label>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="radio"    value="no" data-id="radiobtn8" onchange={handleRadiobtn8} />
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <label>Month/Year:</label>
+                    <input  type="text" size="20" value={show63} onchange={handlecrimemonthyr}>
+                    &nbsp;&nbsp;
+                    <label>Explain: </label>
+                    <input  type="text" size="20" value={show64} onchange={handlecrimeexplain}>
+                    
+                    <br>
+                    
+                    <label>U.S. Citizen? &nbsp;&nbsp;&nbsp;&nbsp;</label>
+                    <label>Yes: </label>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="radio"   value="yes"  data-id="radiobtn9" onchange={handleRadiobtn9} />&nbsp;&nbsp;&nbsp;&nbsp;
+                    <label>No: </label>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="radio"    value="no" data-id="radiobtn9" onchange={handleRadiobtn9} />
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <label>Origin:</label>&nbsp;&nbsp;&nbsp;
+                    <input type="text" size="20"  value={show65} onchange={handlecitizenorigin} >
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <label>Visa Status: </label>&nbsp;&nbsp;&nbsp;
+                    <input  type="text" size="20"  value={show66} onchange={handlevisastatus}>
+                
+                    <br>
+                </li>
+            </ul>
+                </span>
+		</div>
+	</div>
+</template>
+
+
+<template if:true={isStepSix}>
+	<div class="container">
+		<nav class="nav">
+			&nbsp;&nbsp; VII.&nbsp;&nbsp;&nbsp;&nbsp; Borrower Track Record(List "ALL" Fix and Flips or Fix and Hold Deals
+			Completed In last 36 months.)
+
+		</nav>
+		<br/>
+
+		<span class="one">1. &nbsp;</span> <span class="text-form">
+                    <label> Property Type:</label>&nbsp;&nbsp;&nbsp;
+                    <input  type="text"  value={show67} onchange={handlepropertytype1}>&nbsp;&nbsp;&nbsp;
+                    <label> Purchase Date:</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input  type="text"  value={show68} onchange={handlepurchasedate1}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <label> Purchase Price:</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input  type="text"  value={show69} onchange={handlepurchaseprice1}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <br/>
+                    <label> Amount Financed:</label>&nbsp;&nbsp;&nbsp;
+                    <input  type="text"  value={show70} onchange={handleamountfinanced1}>&nbsp;&nbsp;&nbsp;
+                    <label> Rehab Budget:</label>&nbsp;&nbsp;&nbsp;
+                    <input  type="text"  value={show71} onchange={handlebudget1}>&nbsp;&nbsp;&nbsp;
+                    <label> Address 1:</label>&nbsp;&nbsp;&nbsp;
+                    <input  type="text"  value={show72} onchange={handleaddress1}>&nbsp;&nbsp;&nbsp;<br/>
+                    <label> City:</label>&nbsp;&nbsp;&nbsp;
+                    <input  type="text"  value={show73} onchange={handlebtrackcity1}>&nbsp;&nbsp;&nbsp;
+                    <label> State:</label>&nbsp;&nbsp;&nbsp;
+                    <input  type="text"  value={show74} onchange={handlebtrackstate1}>&nbsp;&nbsp;&nbsp;
+                    <label> Zip Code: </label>&nbsp;&nbsp;&nbsp;
+                    <input  type="text"  value={show75} onchange={handlebtrackzipcode1}>&nbsp;&nbsp;&nbsp;
+                    <label> Entity Name: </label>&nbsp;&nbsp;&nbsp;
+                    <input  type="text"  value={show76} onchange={handlebtrackename1}>&nbsp;&nbsp;&nbsp;
+                    <label> Ownership %:</label>&nbsp;&nbsp;&nbsp;
+                    <input  type="text"  value={show77} onchange={handlebtrackownership1}>&nbsp;&nbsp;&nbsp;
+                    <label> Exit: </label>&nbsp;&nbsp;&nbsp;
+                    <input  type="text"  value={show78} onchange={handlebtrackexit1}>&nbsp;&nbsp;&nbsp;
+                    <label> Monthly Rent: </label>&nbsp;&nbsp;&nbsp;
+                    <input  type="text"  value={show79} onchange={handlevisastatusmonthlyrent1}>
+        
+                </span>
+
+
+		<br>
+		<br>
+		<br>
+
+		<hr style="border-top-color: currentcolor">
+		<span class="one">2. </span> <span class="text-form">
+            <label> Property Type:</label>&nbsp;&nbsp;&nbsp;
+            <input  type="text"  value={show80} onchange={handlepropertytype2}>&nbsp;&nbsp;&nbsp;
+            <label> Purchase Date:</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input  type="text"  value={show81} onchange={handlepurchasedate2}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <label> Purchase Price:</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input  type="text"  value={show82} onchange={handlepurchaseprice2}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <br/>
+            <label> Amount Financed:</label>&nbsp;&nbsp;&nbsp;
+            <input  type="text"  value={show83} onchange={handleamountfinanced2}>&nbsp;&nbsp;&nbsp;
+            <label> Rehab Budget:</label>&nbsp;&nbsp;&nbsp;
+            <input  type="text"  value={show84} onchange={handlebudget2}>&nbsp;&nbsp;&nbsp;
+            <label> Address 1:</label>&nbsp;&nbsp;&nbsp;
+            <input  type="text"  value={show85} onchange={handleaddress2}>&nbsp;&nbsp;&nbsp;<br/>
+            <label> City:</label>&nbsp;&nbsp;&nbsp;
+            <input  type="text"  value={show86} onchange={handlebtrackcity2}>&nbsp;&nbsp;&nbsp;
+            <label> State:</label>&nbsp;&nbsp;&nbsp;
+            <input  type="text"  value={show87} onchange={handlebtrackstate2}>&nbsp;&nbsp;&nbsp;
+            <label> Zip Code: </label>&nbsp;&nbsp;&nbsp;
+            <input  type="text"  value={show88} onchange={handlebtrackzipcode2}>&nbsp;&nbsp;&nbsp;
+            <label> Entity Name: </label>&nbsp;&nbsp;&nbsp;
+            <input  type="text"  value={show89} onchange={handlebtrackename2}>&nbsp;&nbsp;&nbsp;
+            <label> Ownership %:</label>&nbsp;&nbsp;&nbsp;
+            <input  type="text"  value={show90} onchange={handlebtrackownership2}>&nbsp;&nbsp;&nbsp;
+            <label> Exit: </label>&nbsp;&nbsp;&nbsp;
+            <input  type="text"  value={show91} onchange={handlebtrackexit2}>&nbsp;&nbsp;&nbsp;
+            <label> Monthly Rent: </label>&nbsp;&nbsp;&nbsp;
+            <input  type="text"  value={show92} onchange={handlevisastatusmonthlyrent2}>
+                </span>
+
+		<br>
+		<br>
+		<br>
+
+		<hr style="border-top-color: currentcolor">
+
+		<span class="one">3. </span> <span class="text-form">&nbsp;&nbsp;&nbsp;&nbsp;
+            <label> Property Type:</label>&nbsp;&nbsp;&nbsp;
+            <input  type="text"  value={show93} onchange={handlepropertytype3}>&nbsp;&nbsp;&nbsp;
+            <label> Purchase Date:</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input  type="text"  value={show94} onchange={handlepurchasedate3}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <label> Purchase Price:</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input  type="text"  value={show95} onchange={handlepurchaseprice3}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <br/>
+            <label> Amount Financed:</label>&nbsp;&nbsp;&nbsp;
+            <input  type="text"  value={show96} onchange={handleamountfinanced3}>&nbsp;&nbsp;&nbsp;
+            <label> Rehab Budget:</label>&nbsp;&nbsp;&nbsp;
+            <input  type="text"  value={show97} onchange={handlebudget3}>&nbsp;&nbsp;&nbsp;
+            <label> Address 1:</label>&nbsp;&nbsp;&nbsp;
+            <input  type="text"  value={show98} onchange={handleaddress3}>&nbsp;&nbsp;&nbsp;<br/>
+            <label> City:</label>&nbsp;&nbsp;&nbsp;
+            <input  type="text"  value={show99} onchange={handlebtrackcity3}>&nbsp;&nbsp;&nbsp;
+            <label> State:</label>&nbsp;&nbsp;&nbsp;
+            <input  type="text"  value={show100} onchange={handlebtrackstate3}>&nbsp;&nbsp;&nbsp;
+            <label> Zip Code: </label>&nbsp;&nbsp;&nbsp;
+            <input  type="text"  value={show101} onchange={handlebtrackzipcode3}>&nbsp;&nbsp;&nbsp;
+            <label> Entity Name: </label>&nbsp;&nbsp;&nbsp;
+            <input  type="text"  value={show102} onchange={handlebtrackename3}>&nbsp;&nbsp;&nbsp;
+            <label> Ownership %:</label>&nbsp;&nbsp;&nbsp;
+            <input  type="text"  value={show103} onchange={handlebtrackownership3}>&nbsp;&nbsp;&nbsp;
+            <label> Exit: </label>&nbsp;&nbsp;&nbsp;
+            <input  type="text"  value={show104} onchange={handlebtrackexit3}>&nbsp;&nbsp;&nbsp;
+            <label> Monthly Rent: </label>&nbsp;&nbsp;&nbsp;
+            <input  type="text"  value={show105} onchange={handlevisastatusmonthlyrent3}>
+                </span>
+
+	</div>
+</template>
+
+
+
+<template if:true={isStepSeven}>
+	<div class="slds-grid slds-wrap">
+		<div class="slds-col slds-size_1-of-1">
+			<span>
+            <div class="container">
+            <nav class="nav">&nbsp; VIII.&nbsp; &nbsp;&nbsp;ATTORNEY INFORMATION</nav><br>
+            <div class="1st">
+                <label>Firm Name: </label>
+                <input  type="text"  value={show106} onchange={handlefirmname}>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  <label>Attorney Name:</label> 
+                  <input  type="text"  value={show107} onchange={handleattoneyname}> 
+            </div>
+            <br>
+            <div class="2nd">
+                <label>Address: </label>
+                <input  type="text"  value={show108} onchange={handleattorneyaddress}>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  <label>Office Phone:</label> 
+                  <input  type="text"  value={show109} onchange={handleattorneyofficephone}>
+            </div>
+            <br>
+            <div class="3rd">
+                <label>City: </label>&nbsp;&nbsp;&nbsp;
+                <input  type="text"  value={show110} onchange={handleviattorneycity}>
+                    &nbsp;&nbsp;&nbsp;  
+                  <label>State:</label> &nbsp;&nbsp;&nbsp;&nbsp;
+                  <input  type="text"  value={show111} onchange={handleattorneystate}>&nbsp;&nbsp;
+                  &nbsp;
+                  <label>Zip Code:</label> &nbsp;&nbsp;&nbsp;
+                  <input  type="text"  value={show112} onchange={handleattorneyzipcode}>&nbsp;&nbsp;
+                  &nbsp;
+                  <label>Email:</label> &nbsp;&nbsp;&nbsp;
+                  <input  type="text"  value={show113} onchange={handleattorneyemail}>
+            </div>
+        
+        </div>
+        </span>
+		</div>
+	</div>
+</template>
+<div class="slds-grid slds-wrap">
+	<div class="slds-col slds-size_1-of-1">
+		<span>
+        <template if:true={isEnablePrev}>
+            <lightning-button variant="brand" label="Previous" onclick={handlePrev} class="slds-button back-btn"></lightning-button>
+        </template>
+         
+        <template if:true={isEnableNext}>
+            <lightning-button label="Next" variant="brand" onclick={handleNext}
+            class="slds-button next-btn"></lightning-button>
+        </template>
+        <template if:true={isEnableFinish}>
+            <lightning-button label="Finish" variant="brand" onclick={handleFinish} class="slds-button finish-btn"></lightning-button>
+        </template>
+        </span>
+	</div>
+</div>
+</div>
+</template>
+
+
+
+---------------------------------------------------------------------- Borrwer_form.css --------------------------------------------------------------------------------
+
+
+input {
+    border: 0;
+    outline: 0;
+    border-bottom: 2px solid black;
+    margin-bottom: 10px;
+    
+}
+
+.container{
+	margin:auto;
+  
+	border:1px solid #070707;
+	padding: 20px 20px 20px 20px;
+	background:#ffffff;
+    font-weight: 700;
+    
+	
+}
+
+.nav{
+    padding: 20px 20px 20px 20px;
+    color: #ffff;
+    font-weight: bold;
+    font-size: 15px;
+    font-style: bold;
+    border: 1px solid #070707;
+    background: #548bb6;
+}
+  
+.li{
+	list-style:none;
+  }
+
+.label{
+	display:inline-block;
+	width:250px;
+    padding: 10px;
+     }
+
+          
+.inputfild {
+    border: 0;
+    outline: 0;
+    border-bottom: 2px solid black;
+    float: right;
+   
+} 
+li{
+	list-style:none;
+  }
+
+
+.radio{
+    display:inline-block;
+	width:200px;
+    padding: 10px;
+     }
+.slds-button{
+    margin: 1%;
+    
+}
+/*Inline Radio Buttons*/
+.radio-combo-inline .slds-form-element__control .slds-radio .slds-radio__label
+{
+    display: inline-block !important;
+}
+.slds-form-element__control {
+    clear: left;
+    position: relative;
+    display: inline-flex;
+}
